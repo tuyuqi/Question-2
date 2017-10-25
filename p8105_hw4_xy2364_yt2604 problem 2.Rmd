@@ -34,6 +34,6 @@ GDP_data = read.csv("GDP.csv") %>%
 combined_data = left_join(pols_month_data,GDP_data, by = "month")
 ```
 
-* Comments:xxxxcfdyil
+* Comments:xxxxcfdyilserth
 
 

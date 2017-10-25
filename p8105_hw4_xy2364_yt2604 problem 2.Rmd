@@ -34,5 +34,28 @@ GDP_data = read.csv("GDP.csv") %>%
 combined_data = left_join(pols_month_data,GDP_data, by = "month")
 ```
 
+```{r}
+plot_data = 
+  combined_data %>%
+  select(prez_dem, month, value) %>%
+  mutate(value = as.numeric(value)) %>% 
+  drop_na() %>% 
+  #group_by(month,prez_dem) %>%
+  #summarize(mean_gdp = mean(value))
+  mutate(prez_dem = recode(prez_dem,"0" = "republican", "1" ="democratic" ))
+
+
+plot2 = ggplot(plot_data, aes(x = month, y = value, color = prez_dem)) + 
+  geom_bar(stat = "identity", fill= "white") + 
+    ggtitle("GDP Performance By Party of Presidents During 1947-2015") +
+    ylab("GDP value")
+plot2
+  
+plot = ggplot(plot_data, aes(x = month, y = value, color = prez_dem))+
+  geom_line()
+plot  
+```
+
+* Comments: Before 1980, the GDP value controlled under two parties was fluctuating throughout their own rulling period. After 1980, the GDP value became more stable within each party's rulling period. But it appears that after 1980, the GDP value on average  governed by republican party was higher than that governed by democratic party.
 
 

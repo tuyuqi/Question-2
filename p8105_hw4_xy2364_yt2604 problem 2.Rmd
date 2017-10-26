@@ -7,26 +7,25 @@ output: html_document
 
 ```{r library}
 library(tidyverse)
-library(readxl)
 library(haven)
-library(readxl)
 library(janitor)
 library(ggridges)
 library(ggthemes)
 library(lubridate)
 library(haven)
 library(stats)
+library(readr)
 ```
 
 ```{r read data}
 pols_month_data = 
-  read.csv("pols-month.csv") %>% 
+  read_csv("pols-month.csv") %>% 
   clean_names() %>% 
   mutate(mon = as.Date(mon,format = "%Y-%m-%d")) %>% 
   mutate(month = lubridate::floor_date((mon), unit = "month"))
 
 
-GDP_data = read.csv("GDP.csv") %>% 
+GDP_data = read_csv("GDP.csv") %>% 
   clean_names() %>% 
   mutate(date = as.Date(date,format = "%Y-%m-%d")) %>% 
   mutate(month = lubridate::floor_date((date), unit = "month"))
@@ -34,18 +33,17 @@ GDP_data = read.csv("GDP.csv") %>%
 combined_data = left_join(pols_month_data,GDP_data, by = "month")
 ```
 
-```{r}
+
+```{r plot data}
 plot_data = 
   combined_data %>%
   select(prez_dem, month, value) %>%
   mutate(value = as.numeric(value)) %>% 
   drop_na() %>% 
-  #group_by(month,prez_dem) %>%
-  #summarize(mean_gdp = mean(value))
   mutate(prez_dem = recode(prez_dem,"0" = "republican", "1" ="democratic" ))
 
 
-plot2 = ggplot(plot_data, aes(x = month, y = value, color = prez_dem)) + 
+plot2 = ggplot(plot_data,aes(x = month, y = value, color = prez_dem)) + 
   geom_bar(stat = "identity", fill= "white") + 
     ggtitle("GDP Performance By Party of Presidents During 1947-2015") +
     ylab("GDP value")

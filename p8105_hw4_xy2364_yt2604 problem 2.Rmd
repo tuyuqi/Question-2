@@ -54,6 +54,6 @@ plot = ggplot(plot_data, aes(x = month, y = value, color = prez_dem))+
 plot  
 ```
 
-* Comments: Before 1980, the GDP value controlled under two parties was fluctuating throughout their own rulling period. After 1980, the GDP value became more stable within each party's rulling period. But it appears that after 1980, the GDP value on average  governed by republican party was higher than that governed by democratic party.
+* Comments: Before 1980, the GDP value controlled under two parties was more fluctuating throughout their own rulling period and there was a increasing trend of GDP from 1960 to 1980. However, after 1980, the GDP value became more stable within each party's rulling period. But it appears that after 1980, the GDP decreased throughtout the time and the GDP value on average governed by republican party was higher than that governed by democratic party. Moreover, there were negative GDP values around 1950-1960 and 2010. 
 
 

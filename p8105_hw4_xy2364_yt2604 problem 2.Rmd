@@ -22,7 +22,7 @@ pols_month_data =
   read_csv("pols-month.csv") %>% 
   clean_names() %>% 
   mutate(mon = as.Date(mon,format = "%Y-%m-%d")) %>% 
-  mutate(month = lubridate::floor_date((mon), unit = "month"))
+  mutate(month = lubridate::floor_date(mon, unit = "month"))
 
 
 GDP_data = read_csv("GDP.csv") %>% 
